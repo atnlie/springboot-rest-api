@@ -1,0 +1,7 @@
+package com.design.renovation.models.repos;
+
+import com.design.renovation.models.entities.Supplier;
+import org.springframework.data.repository.CrudRepository;
+
+public interface SupplierRepo extends CrudRepository<Supplier, Long> {
+}
