@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -20,7 +21,12 @@ public class ProductService {
   }
 
   public Product findOne(Long id) {
-    return productRepo.findById(id).get();
+    Optional<Product> prd = productRepo.findById(id);
+    if (prd.isEmpty()) {
+      return null;
+    }
+      return productRepo.findById(id).get();
+
   }
 
   public Iterable<Product> findAll() {
