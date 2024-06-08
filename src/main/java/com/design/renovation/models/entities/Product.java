@@ -30,11 +30,11 @@ public class Product implements Serializable {
   private Category category;
 
   @ManyToMany
-  @JoinTable(
-      name = "tbl_product_supplier_atn",
-      joinColumns = @JoinColumn(name = "product_id_atn"),
-      inverseJoinColumns = @JoinColumn(name = "supplier_id_atn")
-  )
+//  @JoinTable(
+//      name = "tbl_product_supplier_atn",
+//      joinColumns = @JoinColumn(name = "product_id_atn"),
+//      inverseJoinColumns = @JoinColumn(name = "supplier_id_atn")
+//  )
   private Set<Supplier> suppliers;
 
 }

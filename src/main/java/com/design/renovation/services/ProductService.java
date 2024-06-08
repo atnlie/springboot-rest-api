@@ -1,6 +1,7 @@
 package com.design.renovation.services;
 
 import com.design.renovation.models.entities.Product;
+import com.design.renovation.models.entities.Supplier;
 import com.design.renovation.models.repos.ProductRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,15 @@ public class ProductService {
 
   public List<Product> findByName(String name) {
     return productRepo.findByNameContains(name);
+  }
+
+  public void addSupplier(Supplier supplier, Long productId) {
+    Product product = findOne(productId);
+    if (product == null) {
+      throw new RuntimeException("Product with ID: " + productId + " not found.");
+    }
+    product.getSuppliers().add(supplier);
+    save(product);
   }
 
 }

@@ -2,6 +2,7 @@ package com.design.renovation.controllers;
 
 import com.design.renovation.dto.ResponseData;
 import com.design.renovation.models.entities.Product;
+import com.design.renovation.models.entities.Supplier;
 import com.design.renovation.models.repos.ProductRepo;
 import com.design.renovation.services.ProductService;
 import jakarta.validation.Valid;
@@ -82,6 +83,11 @@ public class ProductController {
   @DeleteMapping("/{id}")
   public void delete(@PathVariable("id") Long id) {
     productService.removeOne(id);
+  }
+
+  @PostMapping("/{id}")
+  public void addSupplier(@RequestBody Supplier supplier, @PathVariable("id") Long productId){
+    productService.addSupplier(supplier, productId);
   }
 
 }

@@ -18,4 +18,6 @@ public class SupplierData {
   @Email(message = "Email is not valid")
   private String email;
 
+  private String phone;
+
 }

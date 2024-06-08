@@ -13,7 +13,7 @@ import java.util.Set;
 @Table(name="tbl_supplier")
 public class Supplier implements Serializable {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
   @Column(length = 200, nullable = false)
@@ -29,11 +29,11 @@ public class Supplier implements Serializable {
   private String phone;
 
   @ManyToMany
-  @JoinTable(
-      name = "tbl_supplier_product_atn",
-      joinColumns = @JoinColumn(name = "supplier_id_atn"),
-      inverseJoinColumns = @JoinColumn(name = "product_id_atn")
-  )
+//  @JoinTable(
+//      name = "tbl_supplier_product_atn",
+//      joinColumns = @JoinColumn(name = "supplier_id_atn"),
+//      inverseJoinColumns = @JoinColumn(name = "product_id_atn")
+//  )
   private Set<Product> products;
 }
 

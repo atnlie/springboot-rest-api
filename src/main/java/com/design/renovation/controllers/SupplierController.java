@@ -2,6 +2,7 @@ package com.design.renovation.controllers;
 
 import com.design.renovation.dto.ResponseData;
 import com.design.renovation.dto.SupplierData;
+import com.design.renovation.models.entities.Category;
 import com.design.renovation.models.entities.Supplier;
 import com.design.renovation.services.SupplierService;
 import jakarta.validation.Valid;
@@ -12,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/suppliers")
@@ -25,10 +29,12 @@ public class SupplierController {
   @PostMapping
   public ResponseEntity<ResponseData<Supplier>> create(@Valid @RequestBody SupplierData supplierData, Errors errors) {
     ResponseData<Supplier> responseData = new ResponseData<>();
+    List<String> errMessages = new ArrayList<>(List.of());
     if (errors.hasErrors()) {
       for(ObjectError error: errors.getAllErrors()) {
-        responseData.getMessages().add(error.getDefaultMessage());
+        errMessages.add(error.getDefaultMessage());
       }
+      responseData.setMessages(errMessages);
       responseData.setStatus(false);
       responseData.setPayload(null);
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
@@ -54,17 +60,23 @@ public class SupplierController {
   }
 
   @GetMapping("/{id}")
-  public Supplier findOne(@PathVariable("id") Long id) {
-    return supplierService.findOne(id);
+  public ResponseEntity<ResponseData<Supplier>> findOne(@PathVariable("id") Long id) {
+//    return supplierService.findOne(id);
+    ResponseData<Supplier> responseData = new ResponseData<>();
+    responseData.setPayload(supplierService.findOne(id));
+    responseData.setStatus(true);
+    return ResponseEntity.ok(responseData);
   }
 
   @PutMapping
   public ResponseEntity<ResponseData<Supplier>> update(@Valid @RequestBody SupplierData supplierData, Errors errors) {
     ResponseData<Supplier> responseData = new ResponseData<>();
+    List<String> errMessages = new ArrayList<>(List.of());
     if (errors.hasErrors()) {
       for(ObjectError error: errors.getAllErrors()) {
-        responseData.getMessages().add(error.getDefaultMessage());
+        errMessages.add(error.getDefaultMessage());
       }
+      responseData.setMessages(errMessages);
       responseData.setStatus(false);
       responseData.setPayload(null);
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
