@@ -2,7 +2,6 @@ package com.design.renovation.services;
 
 import com.design.renovation.helpers.PassEncoder;
 import com.design.renovation.models.entities.AppUser;
-import com.design.renovation.models.entities.Category;
 import com.design.renovation.models.repos.UserRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
