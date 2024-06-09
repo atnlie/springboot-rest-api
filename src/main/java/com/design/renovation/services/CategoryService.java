@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 @Service
@@ -17,15 +16,17 @@ public class CategoryService {
   private CategoryRepo categoryRepo;
 
   public Category save(Category category) {
+    if(category.getId() != null){
+      Category curCategory = categoryRepo.findById(category.getId()).get();
+      curCategory.setName(category.getName());
+      category = curCategory;
+    }
     return categoryRepo.save(category);
   }
 
   public Category findOne(Long id) {
     Optional<Category> category = categoryRepo.findById(id);
-    if (category.isEmpty()) {
-      return null;
-    }
-    return category.get();
+    return category.orElse(null);
   }
 
   public Iterable<Category> findAll() {

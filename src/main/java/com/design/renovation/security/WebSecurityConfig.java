@@ -12,8 +12,16 @@ public class WebSecurityConfig {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
-        .authorizeHttpRequests((authz) -> authz
+        .csrf(csrf -> csrf.disable()) // pay attention on this
+        .cors(cors -> cors.disable())
+// allow all
+//        .authorizeHttpRequests(
+//            (a) -> a.anyRequest().permitAll()
+//        );
+//  restrict all
+        .authorizeHttpRequests((authorize) -> authorize
             .anyRequest().authenticated()
+
         )
         .httpBasic(Customizer.withDefaults());
     return http.build();
@@ -24,7 +32,7 @@ public class WebSecurityConfig {
     return (web) -> web.ignoring().requestMatchers(
         "/api/v1/users/register",
         "/api/v1/users/login"
-//        "/api/v1/users"
+
     );
   }
 

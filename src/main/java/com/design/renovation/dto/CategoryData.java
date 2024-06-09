@@ -10,4 +10,6 @@ public class CategoryData {
   @NotEmpty(message = "Name is required")
   private String name;
 
+  private Long id;
+
 }
