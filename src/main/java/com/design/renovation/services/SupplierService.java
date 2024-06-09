@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,4 +34,17 @@ public class SupplierService {
   public void removeOne(Long id) {
     supplierRepo.deleteById(id);
   }
+
+  public Supplier getSupplierByEmail(String email) {
+    return supplierRepo.getByEmail(email);
+  }
+
+  public List<Supplier> getSupplierContainAddress(String address) {
+    return supplierRepo.getByAddressContainingIgnoreCase(address);
+  }
+
+  public List<Supplier> getSupplierByNameOrAddress(String name, String address) {
+    return supplierRepo.getByNameOrAddressContainingIgnoreCase(name, address);
+  }
+
 }

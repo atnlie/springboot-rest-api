@@ -7,4 +7,5 @@ import lombok.Setter;
 @Getter
 public class SearchData {
     private String searchKey;
+    private String searchSecondKey;
 }

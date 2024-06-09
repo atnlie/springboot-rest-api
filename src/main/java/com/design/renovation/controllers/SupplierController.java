@@ -1,6 +1,7 @@
 package com.design.renovation.controllers;
 
 import com.design.renovation.dto.ResponseData;
+import com.design.renovation.dto.SearchData;
 import com.design.renovation.dto.SupplierData;
 import com.design.renovation.models.entities.Category;
 import com.design.renovation.models.entities.Supplier;
@@ -87,5 +88,20 @@ public class SupplierController {
     responseData.setStatus(true);
     responseData.setPayload(supplierService.save(supplier));
     return ResponseEntity.ok(responseData);
+  }
+
+  @PostMapping("/search/email")
+  public Supplier getSupplierByEmail(@RequestBody SearchData searchData) {
+    return supplierService.getSupplierByEmail(searchData.getSearchKey());
+  }
+
+  @PostMapping("/search/address")
+  public List<Supplier> getSupplierByAddress(@RequestBody SearchData searchData) {
+    return supplierService.getSupplierContainAddress(searchData.getSearchKey());
+  }
+
+  @PostMapping("/search/nameoraddress")
+  public List<Supplier> getSupplierByNameAddress(@RequestBody SearchData searchData) {
+    return supplierService.getSupplierByNameOrAddress(searchData.getSearchKey(), searchData.getSearchSecondKey());
   }
 }
