@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,9 @@ import java.util.Optional;
 public class ProductService {
   @Autowired
   private ProductRepo productRepo;
+
+  @Autowired
+  private SupplierService supplierService;
 
   public Product save(Product product) {
     return productRepo.save(product);
@@ -59,4 +63,15 @@ public class ProductService {
     return productRepo.findProductByNameLike(name);
   }
 
+  public List<Product> getProductByCategory(Long categoryId) {
+    return productRepo.getProductByCategory(categoryId);
+  }
+
+  public List<Product> getProductBySupplier(Long supplierId) {
+    Supplier supplier = supplierService.findOne(supplierId);
+    if(supplier == null) {
+      return new ArrayList<Product>();
+    }
+    return productRepo.getProductBySupplier(supplier);
+  }
 }

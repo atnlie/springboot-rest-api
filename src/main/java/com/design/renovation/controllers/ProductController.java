@@ -101,4 +101,13 @@ public class ProductController {
     return productService.getProductByNameLike(searchData.getSearchKey());
   }
 
+  @GetMapping("/search/category/{categoryId}")
+  public List<Product> getProductByCategory(@PathVariable("categoryId") Long categoryId) {
+    return productService.getProductByCategory(categoryId);
+  }
+
+  @GetMapping("/search/supplier/{supplierId}")
+  public List<Product> getProductBySupplier(@PathVariable("supplierId") Long supplierId) {
+    return productService.getProductBySupplier(supplierId);
+  }
 }
