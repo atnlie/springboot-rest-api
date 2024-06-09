@@ -1,6 +1,7 @@
 package com.design.renovation.controllers;
 
 import com.design.renovation.dto.ResponseData;
+import com.design.renovation.dto.SearchData;
 import com.design.renovation.models.entities.Product;
 import com.design.renovation.models.entities.Supplier;
 import com.design.renovation.models.repos.ProductRepo;
@@ -88,6 +89,16 @@ public class ProductController {
   @PostMapping("/{id}")
   public void addSupplier(@RequestBody Supplier supplier, @PathVariable("id") Long productId){
     productService.addSupplier(supplier, productId);
+  }
+
+  @PostMapping("/search/name")
+  public Product getProductByName(@RequestBody SearchData searchData) {
+    return productService.getProductByName(searchData.getSearchKey());
+  }
+
+  @PostMapping("/search/namelike")
+  public List<Product> getProductByNameLike(@RequestBody SearchData searchData) {
+    return productService.getProductByNameLike(searchData.getSearchKey());
   }
 
 }

@@ -51,4 +51,12 @@ public class ProductService {
     save(product);
   }
 
+  public Product getProductByName(String name) {
+    return productRepo.findProductByName(name);
+  }
+
+  public List<Product> getProductByNameLike(String name) {
+    return productRepo.findProductByNameLike(name);
+  }
+
 }
