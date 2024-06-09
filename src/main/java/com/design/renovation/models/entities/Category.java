@@ -16,5 +16,5 @@ public class Category  implements Serializable {
   private Long id;
 
   @Column(length = 100, nullable = false, unique = true)
-  private String Name;
+  private String name;
 }
